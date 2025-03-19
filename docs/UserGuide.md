@@ -249,5 +249,5 @@ Action | Format, Examples
 **List** | `list`
 **Help** | `help`
 **Save** | `save [FILENAME]` <br> e.g., `save newfile`
-**tag**  | `tag p/PHONE_NUMBER t/TAG` <br> e.g., `tag p/91234567 t/project-x`
-**untag**| `untag p/PHONE_NUMBER t/TAG`<br> e.g., `untag p/91234567 t/project-x`
+**Tag**  | `tag p/PHONE_NUMBER t/TAG` <br> e.g., `tag p/91234567 t/project-x`
+**Untag**| `untag p/PHONE_NUMBER t/TAG`<br> e.g., `untag p/91234567 t/project-x`
