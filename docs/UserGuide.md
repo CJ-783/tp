@@ -155,7 +155,7 @@ Examples:
 
 Finds persons whose name or phone numbers contain any of the given keywords
 
-Format: `find (NAME [NAME]…​ | PHONE [PHONE]…​)`
+Format: `find (n/NAME [NAME]…​ | p/PHONE [PHONE]…​)`
 
 * Only one type of search per command is allowed, either by `NAME` (alphabetic characters) or by `PHONE` (integers 0-9).
 
