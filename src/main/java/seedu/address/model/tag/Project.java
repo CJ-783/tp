@@ -12,8 +12,8 @@ import java.util.Locale;
  */
 public class Project extends Tag {
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
-            "Deadline should be in the format 'dd MMM uuuu HHmm'  with the first letter of the month capitalised "
-                    + "(e.g 01 Apr 2026 2359)";
+            "Deadline should be in the format 'dd MMM uuuu HHmm' (e.g 01 Apr 2026 2359) and must be a valid "
+                    + "date and time.";
     public static final String MESSAGE_PROGRESS_CONSTRAINTS =
             "Progress should be either be 'Complete' or 'Incomplete'";
     public static final String MESSAGE_PAYMENT_CONSTRAINTS =

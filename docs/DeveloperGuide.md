@@ -641,7 +641,6 @@ testers are expected to do more *exploratory* testing.
 
    1. There should be a new file in `/snapshot` with the name consisting of `datetime` in the format of `dMMMuuuu_HHmmss`.  
 
-
 ### Planned Enhancement
 
 1. Undo/redo: enable users to undo and redo commands for flexibility
@@ -649,3 +648,4 @@ testers are expected to do more *exploratory* testing.
 3. More flexible date parsing: allow users a variety of date formats in setstatus
 4. Project description field: enable users to store descriptions for each project in the form of strings
 5. Prevent users from adding new tags/projects with the same name
+
