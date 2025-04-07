@@ -158,8 +158,9 @@ Finds persons whose name or phone numbers contain any of the given keywords
 Format: `find (n/NAME [NAME]…​ | p/PHONE [PHONE]…​)`
 
 * Only one type of search per command is allowed, either by `NAME` (alphabetic characters) or by `PHONE` (integers 0-9).
+* In each use of this command, there must be at least one `NAME` or `PHONE` specified.
 
-**Search by NAME**
+**Search by NAME (Prefix: `n/`)**
 * The order of the `NAME` does not matter. e.g.`Hans Bo` will match `Bo Hans`.
 * The search for `NAME` is case-insensitive. e.g `hans` will match `Hans`
 * Leading and trailing whitespaces around each `NAME` keyword will be trimmed. For example, "Hans   " (with trailing spaces) will be treated as "Hans", and "   Hans" (with leading spaces) will also be trimmed.
@@ -169,7 +170,7 @@ Format: `find (n/NAME [NAME]…​ | p/PHONE [PHONE]…​)`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-**Search by PHONE**
+**Search by PHONE (Prefix: `p/`)**
 * The order of the `PHONE` does not matter. e.g.`88888888 66666666` will match `66666666 88888888`.
 * Leading and trailing whitespaces around each `PHONE` keyword will be trimmed. For example, "88888888   " (with trailing spaces) will be treated as "88888888", and "   88888888" (with leading spaces) will also be trimmed.
 * Spaces between `PHONE` will not be trimmed. For example, "88888888   66666666" will be treated as two separate keywords, while "8888 8888" (with a space inside a number) will remain as-is and will not match "88888888".
@@ -177,11 +178,11 @@ Format: `find (n/NAME [NAME]…​ | p/PHONE [PHONE]…​)`
 * Only full phone numbers will be matched e.g `888` will not match `88888888`.
 
 Examples:
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-* `find 87438807 99272758` returns `Alex Yeoh`, `Bernice Yu` <br>
+* `find p/87438807 99272758` returns `Alex Yeoh`, `Bernice Yu` <br>
   
 ![result for 'find 87438807 99272758'](images/find87438807_99272758Result.png)
 
