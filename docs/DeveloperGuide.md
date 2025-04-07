@@ -363,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a.   ArtHive detects an error where the search keyword(s) contains invalid characters.
+* 2a.   ArtHive detects that the user input is invalid.
   * 2a1.  ArtHive displays an error message.
 
     Use case resumes at step 2.
@@ -385,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a.   ArtHive detects an error where the search keyword(s) contains invalid characters.
+* 2a.   ArtHive detects that the user input is invalid.
     * 2a1.  ArtHive displays an error message.
 
       Use case resumes at step 2.
