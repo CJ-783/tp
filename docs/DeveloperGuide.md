@@ -640,3 +640,49 @@ testers are expected to do more *exploratory* testing.
     **Note**: `/snapshot` should be in the same directory as ArtHive.
 
    1. There should be a new file in `/snapshot` with the name consisting of `datetime` in the format of `dMMMuuuu_HHmmss`.  
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+This team consists of 5 members. 
+
+### 1. Improve Deadline Validation                                                                                                                                                                                                       
+
+ArtHive currently does not prevent users from setting project deadlines to past dates, potentially causing confusion. We plan to enhance the `setstatus` command to display an error message when users attempt to set a deadline in the past, serving as a sanity check.
+
+### 2. Highlight Overdue Projects                                                                                                                                                                                                            
+
+ArtHive does not highlight overdue deadlines in the user interface. This makes it impossible for users to tell at a single glance if any projects are overdue. We plan to rectify this by enhancing the user interface to highlight projects that are currently overdue by comparing deadlines to the system time. One possible solution would be to highlight overdue projects in red to signal the need for immediate attention to the user.
+
+### 3. Flexible Date Parsing                                                                                                                                                                                                                    
+
+ArtHive's `setstatus` command currently accepts only one date input format and enforces English-language dates, which may be overly rigid for potential users. We plan to improve ease-of-use by enhancing the setstatus command to accept multiple date formats and natural language inputs. Additionally, we plan to enhance the display of dates in the user interface to conform to the current system locale, to provide users a more native feeling experience.  
+
+### 4. Add Project Description Field                                                                                                                                                                                                                
+
+Projects in ArtHive are currently unable to store descriptions. This may hinder users when attempting to identify a project, especially when multiple clients have similarly named projects. We plan to add a description parameter to the `tag` command, store this information in project details, and display this information in the user interface. Descriptions will also naturally be editable via the `setstatus` command.
+
+### 5. Add Explicit Duplicate Tag/Project Warnings                                                                                                                                                                                                       
+
+When users attempt to add tags/projects to a contact that already has a tag/project by that name, ArtHive does not make any changes to the contact, but crucially does not notify the user of this, which may result in confusion. We plan to rectify this by enhancing the `tag` command to detect duplicates and display a specific error message, rather than silently rejecting the command.
+
+### 6. Improve Search Capabilities                                                                                                                                                                                                             
+
+ArtHive's `find` command only accepts name or phone parameters. This may be overly restrictive to users, especially if they might be attempting to access a client’s contact details via a project name.  We plan to enhance the `find` command to support searching for contacts by project status, deadline range, or payment status.
+
+### 7. Add Mass Operations Support                                                                                                                                                                                                                  
+
+With the exception of `clear`, ArtHive commands operate on one contact at a time. This may slow down a user attempting to manage a large pool of clients. To remedy this, we plan to modify commands to be able to perform actions on multiple contacts simultaneously, such as `tag multiple/1,2,3 t/urgent` to tag contacts at indexes 1, 2, and 3
+
+### 8. Reduce Command Verbosity
+
+ArtHive's `setstatus` command utilizes overly verbose wording for parameters that are effectively booleans which reduces ease of use as users have to recall specific keywords. For instance, `setstatus 1 proj/logo-design pay/paid by/15 Apr 2025 2359 prog/complete` might be better represented as `setstatus 1 proj/logo-design paid/y by/15 Apr 2025 2359 done/y`. We plan to rectify this by transitioning to a simpler syntax for `setstatus`, utilizing y/n to represent the payment and completion status of projects. 
+
+### 9. Expand Phone Number Support Beyond Singapore 
+
+ArtHive current only accepts Singaporean phone numbers—specifically 8-digit numbers that begin with 3, 6, or 9. To better support users with international contacts, we plan to enhance ArtHive to accept phone numbers from other countries. These enhancements include specific handling of international/area dialing codes and validating formats according to each country’s standards.
+
+### 10. Allowing Names in Multiple Language
+
+ArtHive currently only supports names using alphanumeric characters and a limited set of special characters. To better accommodate an international audience, we plan to support names in different languages and scripts (e.g., Chinese, Arabic, Tamil). This would allow users to input names in their native form, improving inclusivity and user experience across diverse regions.
