@@ -625,7 +625,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: At least one contact with a project. 
     
-    1. Test case: `setstatus 1 proj/mobile-app pay/paid prog/complete` (assuming the first contact has a project named "logo-design")<br>
+    1. Test case: `setstatus 1 proj/mobile-app pay/paid prog/complete` (assuming the first contact has a project named "mobile-app")<br>
        Expected: The project "mobile-app" for the first contact is updated with payment status "Paid" and     
       progress status "Complete". Success message is shown
       
@@ -635,7 +635,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: At least one contact in the list with an email address.
     
-    1. Test case: `switchcontact p/87438807` (assuming a contact with this phone number and email exists) Expected: The preferred contact method for the contact with phone number "87438807" will have their preferred contact method switched from "Phone" to "Email" or vice versa. 
+    1. Test case: `switchcontact p/87438807` (assuming a contact with this phone number exists and has an email address)<br> Expected: The preferred contact method for the contact with phone number "87438807" will have their preferred contact method switched from "Phone" to "Email" or vice versa. 
 
 ### Deleting a contact
 
