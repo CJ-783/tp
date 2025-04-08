@@ -102,7 +102,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a contact).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -126,12 +126,6 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 
 ### Storage component
@@ -173,11 +167,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new contact. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -185,7 +179,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -234,7 +228,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -276,7 +270,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user with many clients | save my client's contacts            | keep track of all my clients's information                            |
 | `* * *`  | user with many clients | track payments                       | check whether my clients have paid my commission                      |
 | `* *`    | user                   | blacklist or tag clients             | identify unreasonable clients easily and not take more work from them |
-| `* *`    | user with many clients | find contact by name or phone number | locate a person easily                                                |
+| `* *`    | user with many clients | find contact by name or phone number | locate a contact easily                                                |
 
 
 ---
@@ -594,25 +588,73 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+       
+### Adding a contact
 
-### Deleting a person
+1. Adding a contact with required fields only.
 
-1. Deleting a person while all persons are being shown
+   1. Test case: `add n/John Doe p/91234567`<br>
+      Expected: Contact named "John Doe" is added to the contact list with the specified phone number. Details of added contact shown in status message. 
+      
+1. Adding a contact with optional fields. 
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Test case: `add n/Jane Doe p/93214567 e/jane@example.com t/client proj/website-design`<br>
+      Expected: Contact named "Jane Doe" is added to the contact list with the specified parameters.
+      Details of added contact shown in status message.
+      
+### Tagging a contact
+
+1. Adding tags and projects to a contact. 
+
+    1. Prerequisites: At least one contact in the list
+    
+    1. Test case: `tag p/87438807 t/client proj/logo-design` (assuming a contact with this phone number exists)<br> 
+       Expected: The tag "client" and project "logo-design" are added to the contact with phone number "87438807". Success message is shown. 
+       
+### Untagging a contact
+
+1. Removing tags and/or projects from a contact.
+
+    1. Prerequisites: At least one contact with tags or projects.
+    
+    1. Test case: `untag p/87438807 t/client proj/logo-design` (assuming a contact with this phone number and tag exists) <br>
+       Expected: The tag "client" and the project "logo-design" are removed from the contact with phone number "87438807". Success message is shown in the status message.
+
+### Setting project status
+1. Setting the status of a project assigned to a contact. 
+
+    1. Prerequisites: At least one contact with a project. 
+    
+    1. Test case: `setstatus 1 proj/mobile-app pay/paid prog/complete` (assuming the first contact has a project named "logo-design")<br>
+       Expected: The project "mobile-app" for the first contact is updated with payment status "Paid" and     
+      progress status "Complete". Success message is shown
+      
+### Switching preferred contact method  
+
+1. Switching the preferred contact method of a client from "Phone" to "Email"
+
+    1. Prerequisites: At least one contact in the list with an email address.
+    
+    1. Test case: `switchcontact p/87438807` (assuming a contact with this phone number and email exists) Expected: The preferred contact method for the contact with phone number "87438807" will have their preferred contact method switched from "Phone" to "Email" or vice versa. 
+
+### Deleting a contact
+
+1. Deleting a contact while all contacts are being shown
+
+   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. 
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Save data
 
-1. Saving data without parameter
+1. Saving data without parameters
 
    1. Key in `save` in the command space.
 
@@ -621,7 +663,7 @@ testers are expected to do more *exploratory* testing.
 
    1. There should only be one file in `/data` called `arthive.json`.
 
-1. Saving data with parameter
+1. Saving data with parameters
 
    1. Key in `save <filename>` in the command space.
 
@@ -683,6 +725,6 @@ ArtHive's `setstatus` command utilizes overly verbose wording for parameters tha
 
 ArtHive current only accepts Singaporean phone numbers—specifically 8-digit numbers that begin with 3, 6, or 9. To better support users with international contacts, we plan to enhance ArtHive to accept phone numbers from other countries. These enhancements include specific handling of international/area dialing codes and validating formats according to each country’s standards.
 
-### 10. Allowing Names in Multiple Language
+### 10. Allowing Names in Multiple Languages
 
 ArtHive currently only supports names using alphanumeric characters and a limited set of special characters. To better accommodate an international audience, we plan to support names in different languages and scripts (e.g., Chinese, Arabic, Tamil). This would allow users to input names in their native form, improving inclusivity and user experience across diverse regions.

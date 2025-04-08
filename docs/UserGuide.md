@@ -77,20 +77,20 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Listing all persons : `list`
+### Listing all contacts : `list`
 
-Shows a list of all persons in ArtHive.
+Shows a list of all contacts in ArtHive.
 
 Format: `list`
 
-### Adding a person: `add`
+### Adding a contact: `add`
 
-Adds a person to ArtHive.
+Adds a contact to ArtHive.
 
 Format: `add n/NAME p/PHONE [e/EMAIL] [t/TAG]…​ [proj/PROJECT]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags and/or projects (including 0).
+A contact can have any number of tags and/or projects (including 0).
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -133,17 +133,17 @@ Examples:
 
   ![result for 'find alex david'](images/addContactResult.png)
 
-### Editing a person : `edit`
+### Editing a contact : `edit`
 
-Edits an existing person in ArtHive.
+Edits an existing contact in ArtHive.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
-* Edits the person at the specified `INDEX`. 
-  * The index refers to the positive integer within the bounds of the displayed person list  1, 2, 3, …​
-  * The `INDEX` must be a valid index (i.e. Positive integer within the bounds of the displayed person list).
+* Edits the contact at the specified `INDEX`. 
+  * The index refers to the positive integer within the bounds of the displayed contact list  1, 2, 3, …​
+  * The `INDEX` must be a valid index (i.e. Positive integer within the bounds of the displayed contact list).
 
-* Only edits to a person's name, phone number and email address is allowed.
+* Only edits to a contact's name, phone number and email address is allowed.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -170,7 +170,7 @@ Email (`e/EMAIL`)
 * Email MUST contain a Top-Level Domain.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 
 <div style="display: flex; gap: 10px; text-align: center;">
   <div style="flex: 1;">
@@ -183,9 +183,9 @@ Examples:
   </div>
 </div>
 
-### Locating persons: `find`
+### Locating contacts: `find`
 
-Finds persons whose name or phone numbers contain any of the given keywords
+Finds contacts whose name or phone numbers contain any of the given keywords
 
 Format: `find (n/NAME [NAME]…​ | p/PHONE [PHONE]…​)`
 
@@ -197,16 +197,16 @@ Format: `find (n/NAME [NAME]…​ | p/PHONE [PHONE]…​)`
 * The search for `NAME` is case-insensitive. e.g `hans` will match `Hans`
 * Leading and trailing whitespaces around each `NAME` keyword will be trimmed. For example, "Hans   " (with trailing spaces) will be treated as "Hans", and "   Hans" (with leading spaces) will also be trimmed.
 * Spaces between `NAME` keywords will not be trimmed. For example, "Hans Bo" will be treated as two separate keywords, while "Ha ns" (with a space inside) will remain as-is and will not match "Hans".
-* Only the Person's name is searched.
+* Only the contact's name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 **Search by PHONE (`p/PHONE`)**
 * The order of the `PHONE` does not matter. e.g.`88888888 66666666` will match `66666666 88888888`.
 * Leading and trailing whitespaces around each `PHONE` keyword will be trimmed. For example, "88888888   " (with trailing spaces) will be treated as "88888888", and "   88888888" (with leading spaces) will also be trimmed.
 * Spaces between `PHONE` will not be trimmed. For example, "88888888   66666666" will be treated as two separate keywords, while "8888 8888" (with a space inside a number) will remain as-is and will not match "88888888".
-* Only the Person's phone number is searched.
+* Only the Contact's phone number is searched.
 * Only full phone numbers will be matched e.g `888` will not match `88888888`.
 
 Examples:
@@ -218,7 +218,7 @@ Examples:
   
 ![result for 'find 87438807 99272758'](images/find87438807_99272758Result.png)
 
-### Deleting a person : `delete`
+### Deleting a contact: `delete`
 
 Deletes the specified contact in the current displayed contact list from ArtHive.
 
@@ -228,8 +228,8 @@ Format: `delete (INDEX | p/PHONE )`
 
 * Deletes the contact at the specified `INDEX` **or** with the specified `PHONE`.
 
-    * The index refers to the positive integer within the bounds of the displayed person list  1, 2, 3, …​
-    * The `INDEX` must be a valid index (i.e. Positive integer within the bounds of the displayed person list).
+    * The index refers to the positive integer within the bounds of the displayed contact list  1, 2, 3, …​
+    * The `INDEX` must be a valid index (i.e. Positive integer within the bounds of the displayed contact list).
     
 
 Phone (`p/PHONE`)
@@ -247,11 +247,11 @@ Examples:
 
 ### Tagging a Contact with a Tag/Project : `tag`
 
-Assigns a Tag and/or a Project to an existing person in ArtHive.
+Assigns a Tag and/or a Project to an existing contact in ArtHive.
 
 Format: `tag p/PHONE (t/TAG | proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`
 
-* Adds one or more Tags/Projects to the person specified by `PHONE`.
+* Adds one or more Tags/Projects to the contact specified by `PHONE`.
 * In each use of this command, there must be at least one `TAG` or `PROJECT` specified.
 
 Phone (`p/PHONE`)
@@ -259,23 +259,23 @@ Phone (`p/PHONE`)
 
 Tag/Project (`t/TAG`/`p/PROJECT`)
 * `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
-* `TAG`/`PROJECT` are case-insensitive and will be automatically converted to lowercase regardless of input. For example, `PROJ-X` will be saved and displayed as `proj-x`. If another `Proj-X` is added to the same person, it will be considered as adding a Tag/Project that already exists.
+* `TAG`/`PROJECT` are case-insensitive and will be automatically converted to lowercase regardless of input. For example, `PROJ-X` will be saved and displayed as `proj-x`. If another `Proj-X` is added to the same contact, it will be considered as adding a Tag/Project that already exists.
 * Projects will have a default values of "Incomplete", "Unpaid", and a deadline set 1 day after creation. Modifications can be made using the `setstatus` command.
-* The existing Tags/Projects of the person will not be removed when new Tags/Projects are added.
-* Adding a Tag/Project that already exists for a person will not result in an error, and the system will remain unchanged.
+* The existing Tags/Projects of the contact will not be removed when new Tags/Projects are added.
+* Adding a Tag/Project that already exists for a contact will not result in an error, and the system will remain unchanged.
 
 Examples:
-*  `tag p/81234567 t/friend` Adds a Tag `friend` to the person who has the phone number `81234567`.
-*  `tag p/91234567 t/friend proj/friend-project` Adds the Tag`friend` and Project `friend-project` to the person who has the phone number `91234567`.
+*  `tag p/81234567 t/friend` Adds a Tag `friend` to the contact who has the phone number `81234567`.
+*  `tag p/91234567 t/friend proj/friend-project` Adds the Tag`friend` and Project `friend-project` to the contact who has the phone number `91234567`.
    ![tag](images/tagAdded.png)
 
 ### Untagging a Contact with a Tag/Project : `untag`
 
-Deletes a Tag and/or a Project from an existing person in ArtHive.
+Deletes a Tag and/or a Project from an existing contact in ArtHive.
 
 Format: `untag p/PHONE (t/TAG | proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`
 
-* Removes one or more Tags/Projects from the person specified by `PHONE`, if it exists.
+* Removes one or more Tags/Projects from the contact specified by `PHONE`, if it exists.
 
 Phone (`p/PHONE`)
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
@@ -283,22 +283,22 @@ Phone (`p/PHONE`)
 Tag/Project (`t/TAG`/`p/PROJECT`)
 * In each use of this command, there must be at least one `TAG` or `PROJECT` specified.
 * `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
-* Untagging a Tag/Project from a person deletes the Tag/Project forever.
+* Untagging a Tag/Project from a contact deletes the Tag/Project forever.
 
 Examples:
-*  Person A with phone number `81234567` has no tags. `untag p/81234567 t/friend` returns an error message as the Tag does not exist.
-*  Person B with phone number `91234567` has 1 Tag `friend` and 1 Project `friend-project`. `untag p/91234567 proj/friend-project` removes the Project `friend-project` only.
+*  Contact A with phone number `81234567` has no tags. `untag p/81234567 t/friend` returns an error message as the Tag does not exist.
+*  Contact B with phone number `91234567` has 1 Tag `friend` and 1 Project `friend-project`. `untag p/91234567 proj/friend-project` removes the Project `friend-project` only.
    ![untag](images/tagRemoved.png)
 
 
 ### Updating the status of a Project : `setstatus`
 
-Updates the status of a Project from an existing person in ArtHive.
+Updates the status of a Project from an existing contact in ArtHive.
 
 Format: `setstatus INDEX proj/PROJECT [pay/PAYMENT] [by/DEADLINE] [prog/PROGRESS]`
 
-* Updates the Project tagged to the person at the specified `INDEX`. The `INDEX` refers to the index number shown in the displayed person list. The `INDEX` must be a positive integer 1, 2, 3, …​
-* The `INDEX` must be a valid index (i.e. Positive integer within the bounds of the displayed person list).
+* Updates the Project tagged to the contact at the specified `INDEX`. The `INDEX` refers to the index number shown in the displayed contact list. The `INDEX` must be a positive integer 1, 2, 3, …​
+* The `INDEX` must be a valid index (i.e. Positive integer within the bounds of the displayed contact list).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 

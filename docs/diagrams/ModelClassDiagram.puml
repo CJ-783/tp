@@ -45,6 +45,8 @@ Person *--> PreferredContactMethod
 Person *--> "*" Tag
 Person *--> "*" Project
 
+Project -up-|> Tag
+
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
