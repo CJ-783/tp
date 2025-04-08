@@ -470,10 +470,10 @@ Action | Format, Examples
 **List** | `list`                                                                                                                                                        
 **Add** | `add n/NAME p/PHONE [e/EMAIL] [t/TAG]…​ [proj/PROJECT]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend proj/project-work`             
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                
-**Find** | `find (n/NAME [NAME]…​ \| p/PHONE [PHONE]…​)` <br> e.g., `find n/James Jake` or `find p/87487765 88888888`                                                          
-**Delete** | `delete (p/PHONE \| INDEX)`<br> e.g., `delete 3` or `delete p/87487765`                                                                                       
-**Tag**   | `tag p/PHONE (t/TAG \| proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie proj/project-x`                                           
-**UnTag**   | `untag p/PHONE (t/TAG \| proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`<br> e.g., `untag p/91234567 t/bestie proj/project-x`                                       
+**Find** | `find (n/NAME [NAME]…​ | p/PHONE [PHONE]…​)` <br> e.g., `find n/James Jake` or `find p/87487765 88888888`                                                          
+**Delete** | `delete (p/PHONE | INDEX)`<br> e.g., `delete 3` or `delete p/87487765`                                                                                       
+**Tag**   | `tag p/PHONE (t/TAG | proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie proj/project-x`                                           
+**UnTag**   | `untag p/PHONE (t/TAG | proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`<br> e.g., `untag p/91234567 t/bestie proj/project-x`                                       
 **SetStatus** | `setstatus INDEX proj/PROJECT [pay/PAYMENT] [by/DEADLINE] [prog/PROGRESS]` <br> e.g., `setstatus 1 proj/milestone1-5 pay/paid by/03 Apr 2025 2359 prog/complete` 
 **Save** | `save [FILENAME]` <br> e.g., `save newfile`                                                                                                                   
 **Snapshot** | `snapshot`                                                                                                                                                    
